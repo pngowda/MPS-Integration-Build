@@ -101,7 +101,7 @@ task publishMPS(type: Zip, dependsOn: unzipMPS) {
 	println "mpsUnpackedDir " + mpsUnpackedDir
 	println "upload version "+uploadVersion
 	setMPSVersion=mpsVersion.toString()+'-SNAPSHOT'
-	println "##teamcity[setParameter name='env.mpsVersion' value=setMPSVersion]"
+	println "##teamcity[mpsVersion '${setMPSVersion}']"
     from mpsUnpackedDir
 }
 
