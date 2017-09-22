@@ -100,7 +100,8 @@ task unzipMPS(dependsOn: MPSVersionTask) {
 task publishMPS(type: Zip, dependsOn: unzipMPS) {
 	println "mpsUnpackedDir " + mpsUnpackedDir
 	println "upload version "+uploadVersion
-	setMPSVersion=mpsVersion.toString()
+	setMPSVersion=mpsVersion.toString()+'-SNAPSHOT'
+	println "##teamcity[setParameter name='env.mpsVersion' value=setMPSVersion]"
     from mpsUnpackedDir
 }
 
@@ -117,7 +118,7 @@ publishing {
 				groupId 'com.jetbrains'
 				artifactId 'mps'
 				artifact publishMPS
-				version setMPSVersion+'-SNAPSHOT'
+				version setMPSVersion
 			}
         }
 	repositories {
