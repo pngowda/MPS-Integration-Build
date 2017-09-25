@@ -2,26 +2,13 @@ import groovy.io.FileType
 apply plugin: 'base'
 apply plugin: 'maven-publish'
 	
-/*def mpsBuild='MPS-171.1448'
-def mpsMajor ='2017.1'
-def mpsDownloadDir = new File(System.getProperty("user.dir"), "MPS-171.1448")
-def mpsDownloadFile = new File("MPS-171.1448.zip")
-def eapSuffix = mpsBuild.contains("EAP") ? " EAP" : ""
-def mpsUnpackedDir = new File(mpsDownloadDir, "MPS ${mpsMajor}${eapSuffix}")
-def version '171.1448-SNAPSHOT'
-*/
-
-def mpsBuild
-def mpsMajor
 def mpsDownloadDir
 def mpsDownloadFile
-def eapSuffix
-def String mpsUnpackedDir
+def mpsUnpackedDir
 def uploadVersion
 def mpsVersion
 def setMPSVersion
-
-
+def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
 
 task MPSVersionTask {
 	def mpsDistributionList=[20172]
@@ -50,9 +37,6 @@ task MPSVersionTask {
 		def mpsDownloadUrl='https://teamcity.jetbrains.com/guestAuth/repository/download/MPS_'+it+'_Distribution_DownloadableArtifacts/.lastPinned/'+mpsVersion+'.zip'
 		downloadMPS(mpsDownloadUrl,mpsVersion)
 		mpsDownloadDir = new File(System.getProperty("user.dir"), mpsVersion.toString())
-
-
-		println "....."+ mpsVersion.toString()
 		mpsDownloadFile = new File(mpsVersion.toString()+".zip")
 	}
 }
@@ -66,49 +50,23 @@ def downloadMPS(mpsDownloadUrlPath,mpsVersionString){
 
 
 task unzipMPS(dependsOn: MPSVersionTask) {
-	//doLast {
-		println "mpsDownloadFile "+mpsDownloadFile
-		println "mpsDownloadDir "+ mpsDownloadDir.toString()
-		//println "0000 "+
-		inputs.file mpsDownloadFile
-		outputs.dir mpsDownloadDir
-		ant.unzip src: mpsDownloadFile, dest: mpsDownloadDir
-		//project.ext.mpsUnpackedDir = new File(mpsDownloadDir, mpsDownloadDir.list().first())
-	//}
-
-
+	inputs.file mpsDownloadFile
+	outputs.dir mpsDownloadDir
+	ant.unzip src: mpsDownloadFile, dest: mpsDownloadDir
 	def dirList = new ArrayList()
 	def dir = new File(mpsDownloadDir.toString())
 	dirList=dir.list()
-	println dirList[0]
-	//dir.eachFileRecurse (FileType.FILES) { file ->
-	//	list << file
-	//}
-	//list.each {
-	//	println it.path
-	//}
 	mpsUnpackedDir = new File(mpsDownloadDir, dirList[0])
 	uploadVersion = dirList[0]
-
-    //doLast {
-	//	ant.unzip src: mpsDownloadFile, dest: mpsDownloadDir
-	//	//project.ext.mpsUnpackedDir = new File(mpsDownloadDir, mpsDownloadDir.list().first())
-	//}
 }
 
 
 task publishMPS(type: Zip, dependsOn: unzipMPS) {
-	println "mpsUnpackedDir " + mpsUnpackedDir
-	println "upload version "+uploadVersion
 	setMPSVersion=mpsVersion.toString()+'-SNAPSHOT'
-	//println "##teamcity[mpsVersion '${setMPSVersion}']"
 	println "##teamcity[setParameter name='env.mpsVersion' value='${setMPSVersion}']"
     from mpsUnpackedDir
 }
 
-task setVersion{
-	println "mpsVersion "+mpsVersion
-}
 artifacts {
     'default' publishMPS
 }
@@ -125,10 +83,10 @@ publishing {
 	repositories {
         maven {
             credentials {
-              username 'pgowda'
-              password 'Mar2018@91'
+				username nexusUsername
+				password nexusPassword
             }
-            url "https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
+            url mpsUploadURepo
         }
     }
 }
