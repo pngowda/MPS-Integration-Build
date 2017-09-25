@@ -11,35 +11,25 @@ def setMPSVersion
 def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
 
 task MPSVersionTask {
-	def mpsDistributionList=[20172]
-	mpsDistributionList.each {
-		def inputIOFileList=new ArrayList()
-		def buildVersion
-		if(it==35){
-			println "MPS Build Version:20171"
-			buildVersion="20171"
+	def buildVersion = project.getProperty('mps_build')
+	def inputIOFileList=new ArrayList()
+	def mpsVersionUrl="https://teamcity.jetbrains.com/guestAuth/app/rest/builds?pinned=true&status=SUCCESS&buildType=MPS_"+buildVersion+"_Distribution_DownloadableArtifacts&fields=build(number,status,lastChange,pinned)"
+	def headers = [ Accept: 'application/xml']
+	def xmlText = new URL(mpsVersionUrl).getText( requestProperties: headers )
+	def parsedProjectXml = new XmlSlurper().parseText( xmlText )
+	parsedProjectXml.build.each {
+		build -> if((build.@pinned)=="true"){
+				inputIOFileList.add(build.@number)
 		}
-		else {
-			println "MPS Build Version:"+it
-			buildVersion=it
-		}
-		def mpsVersionUrl="https://teamcity.jetbrains.com/guestAuth/app/rest/builds?pinned=true&status=SUCCESS&buildType=MPS_"+it+"_Distribution_DownloadableArtifacts&fields=build(number,status,lastChange,pinned)"
-		def headers = [ Accept: 'application/xml']
-		def xmlText = new URL(mpsVersionUrl).getText( requestProperties: headers )
-		def parsedProjectXml = new XmlSlurper().parseText( xmlText )
-		parsedProjectXml.build.each {
-			build -> if((build.@pinned)=="true"){
-					inputIOFileList.add(build.@number)
-			}
-		}
-		mpsVersion=inputIOFileList.first()
-		println "Last Pinned MPS Version for : "+buildVersion+"--> " +mpsVersion
-		def mpsDownloadUrl='https://teamcity.jetbrains.com/guestAuth/repository/download/MPS_'+it+'_Distribution_DownloadableArtifacts/.lastPinned/'+mpsVersion+'.zip'
-		downloadMPS(mpsDownloadUrl,mpsVersion)
-		mpsDownloadDir = new File(System.getProperty("user.dir"), mpsVersion.toString())
-		mpsDownloadFile = new File(mpsVersion.toString()+".zip")
 	}
+	mpsVersion=inputIOFileList.first()
+	println "Last Pinned MPS Version "+buildVersion+"--> " +mpsVersion
+	def mpsDownloadUrl='https://teamcity.jetbrains.com/guestAuth/repository/download/MPS_'+buildVersion+'_Distribution_DownloadableArtifacts/.lastPinned/'+mpsVersion+'.zip'
+	downloadMPS(mpsDownloadUrl,mpsVersion)
+	mpsDownloadDir = new File(System.getProperty("user.dir"), mpsVersion.toString())
+	mpsDownloadFile = new File(mpsVersion.toString()+".zip")
 }
+
 
 def downloadMPS(mpsDownloadUrlPath,mpsVersionString){
 	def url = mpsDownloadUrlPath
