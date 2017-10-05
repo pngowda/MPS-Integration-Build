@@ -1,0 +1,78 @@
+buildscript {
+  repositories { mavenCentral() }
+  dependencies { classpath 'org.ajoberstar:gradle-git:1.4.1' }
+}
+
+import org.ajoberstar.grgit.Grgit
+import org.ajoberstar.gradle.git.tasks.*
+
+task cloneGitRepo() {
+  File dirIets3Os = new File('iets3OS')
+  File dirIets3core = new File('iets3Core')
+  File dirmbeddr = new File('mbeddr')
+  doLast {
+    def cwd=System.getProperty("user.dir")
+
+    if(!dirIets3Os.exists()){
+      def ietsOsGrgit = Grgit.clone(dir: file(dirIets3Os), uri: 'https://github.com/pngowda/iets3.opensource.git')
+    }
+    git_checkout_update(cwd+File.separator+dirIets3Os)
+
+    //if(!diriets3core.exists()){
+    //  def ietsOsGrgit = Grgit.clone(dir: file(diriets3core), uri: 'https://github.com/pngowda/devops.git')
+    //}
+    //git_checkout_update(cwd+File.separator+diriets3core)
+  }
+
+
+}
+
+def git_checkout_update(destinationFolder){
+  System.setProperty("user.dir", new File(destinationFolder).getAbsolutePath())
+  println "GIT project directory: "+destinationFolder
+
+  //git reset --hard HEAD
+  def command1 = "git checkout master"
+  def command2 = "git pull origin master"
+  def command3 = "git checkout Integration_Build"
+  def command4 = "git rebase master"
+  def command5 = "git pull"
+  def command6 = "git push origin Integration_Build"
+
+  def proc1 = command2.execute(null, new File(System.getProperty("user.dir")))
+  proc1.waitFor()
+  println "Process exit code: ${proc1.exitValue()}"
+  println "${proc1.err.text}"
+  println "${proc1.in.text}"
+
+  def proc2 = command2.execute(null, new File(System.getProperty("user.dir")))
+  proc2.waitFor()
+  println "Process exit code: ${proc2.exitValue()}"
+  println "${proc2.err.text}"
+  println "${proc2.in.text}"
+
+  def proc3 = command3.execute(null, new File(System.getProperty("user.dir")))
+  proc3.waitFor()
+  println "Process exit code: ${proc3.exitValue()}"
+  println "${proc3.err.text}"
+  println "${proc3.in.text}"
+
+  def proc4 = command4.execute(null, new File(System.getProperty("user.dir")))
+  proc4.waitFor()
+  println "Process exit code: ${proc4.exitValue()}"
+  println "${proc4.err.text}"
+  println "${proc4.in.text}"
+
+  def proc5 = command5.execute(null, new File(System.getProperty("user.dir")))
+  proc5.waitFor()
+  println "Process exit code: ${proc5.exitValue()}"
+  println "${proc5.err.text}"
+  println "${proc5.in.text}"
+
+  def proc6 = command6.execute(null, new File(System.getProperty("user.dir")))
+  proc6.waitFor()
+  println "Process exit code: ${proc6.exitValue()}"
+  println "${proc6.err.text}"
+  println "${proc6.in.text}"
+}
+
