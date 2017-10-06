@@ -7,39 +7,53 @@ import org.ajoberstar.grgit.Grgit
 import org.ajoberstar.gradle.git.tasks.*
 
 task cloneGitRepo() {
-  File dirIets3Os = new File('iets3OS')
-  File dirIets3core = new File('iets3Core')
-  File dirmbeddr = new File('mbeddr')
+  File dirIets3Os = new File('iets3.opensource')
+  File dirIets3core = new File('iets3.core')
+  File dirMbeddr = new File('mbeddr.core')
+  def urlIets3Os="https://github.com/IETS3/iets3.opensource.git"
+  def urlIets3Core="https://github.com/IETS3/iets3.core.git"
+  def urlMbeddr="https://github.com/mbeddr/mbeddr.core.git"
+
   doLast {
-    def cwd=System.getProperty("user.dir")
+    def cloneDirectory=System.getProperty("user.dir")
 
-    if(!dirIets3Os.exists()){
-      def ietsOsGrgit = Grgit.clone(dir: file(dirIets3Os), uri: 'https://github.com/pngowda/iets3.opensource.git')
-    }
-    git_checkout_update(cwd+File.separator+dirIets3Os)
+    if(dirIets3Os.exists())dirIets3Os.deleteDir()
+    gitRepoClone(cloneDirectory,urlIets3Os)
+    git_checkout_update(cloneDirectory+File.separator+dirIets3Os)
 
-    //if(!diriets3core.exists()){
-    //  def ietsOsGrgit = Grgit.clone(dir: file(diriets3core), uri: 'https://github.com/pngowda/devops.git')
-    //}
-    //git_checkout_update(cwd+File.separator+diriets3core)
+    if(dirIets3core.exists())dirIets3core.deleteDir()
+    gitRepoClone(cloneDirectory,urlIets3Core)
+    git_checkout_update(cloneDirectory+File.separator+dirIets3core)
+
+    if(dirMbeddr.exists())dirMbeddr.deleteDir()
+    gitRepoClone(cloneDirectory,urlMbeddr)
+    git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
   }
+}
 
 
+def gitRepoClone(cloneDir,urlToClone){
+  println "Cloning to directory: "+cloneDir
+  def command = "git clone "+ urlToClone
+
+  def proc = command.execute(null, new File(cloneDir))
+  proc.waitFor()
+  println "Process exit code: ${proc.exitValue()}"
+  println "${proc.err.text}"
+  println "${proc.in.text}"
 }
 
 def git_checkout_update(destinationFolder){
   System.setProperty("user.dir", new File(destinationFolder).getAbsolutePath())
   println "GIT project directory: "+destinationFolder
-
-  //git reset --hard HEAD
   def command1 = "git checkout master"
   def command2 = "git pull origin master"
-  def command3 = "git checkout Integration_Build"
+  def command3 = "git checkout Integration-Build"
   def command4 = "git rebase master"
   def command5 = "git pull"
-  def command6 = "git push origin Integration_Build"
+  def command6 = "git push origin Integration-Build"
 
-  def proc1 = command2.execute(null, new File(System.getProperty("user.dir")))
+  def proc1 = command1.execute(null, new File(System.getProperty("user.dir")))
   proc1.waitFor()
   println "Process exit code: ${proc1.exitValue()}"
   println "${proc1.err.text}"
@@ -75,4 +89,3 @@ def git_checkout_update(destinationFolder){
   println "${proc6.err.text}"
   println "${proc6.in.text}"
 }
-
