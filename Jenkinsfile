@@ -1,3 +1,4 @@
+def gradleOpts ='--no-daemon --info --stacktrace'
 node {
 	stage'checkout'    
 		checkout scm 
