@@ -1,8 +1,8 @@
 node {
-	stage ('checkout')    
+	stage ('checkout'){ 
 		checkout scm 
-    
-	stage ('build')
+    }
+	stage ('build'){
 		echo "Building on branch: ${env.BRANCH_NAME}"
 		if(isUnix()) {
 			sh "./gradlew -b build.gradle publish"
@@ -10,7 +10,9 @@ node {
 		else{
 			bat "./gradlew -b build.gradle publish"
 		}
+	}
         
-	stage ('deploy')    
+	stage ('deploy'){
 		echo "Deployment stage"
+	}
 }
