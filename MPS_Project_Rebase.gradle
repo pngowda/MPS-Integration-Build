@@ -10,20 +10,20 @@ task cloneGitRepo() {
   File dirIets3Os = new File('iets3.opensource')
   File dirIets3core = new File('iets3.core')
   File dirMbeddr = new File('mbeddr.core')
-  //def urlIets3Os="https://github.com/pngowda/iets3.opensource.git"
-  //def urlIets3Core="https://github.com/IETS3/iets3.core.git"
+  def urlIets3Os="https://github.com/IETS3/iets3.opensource.git"
+  def urlIets3Core="https://github.com/IETS3/iets3.core.git"
   def urlMbeddr="https://github.com/mbeddr/mbeddr.core.git"
 
   doLast {
     def cloneDirectory=System.getProperty("user.dir")
 
-    //if(dirIets3Os.exists())dirIets3Os.deleteDir()
-    //gitRepoClone(cloneDirectory,urlIets3Os)
-    //git_checkout_update(cloneDirectory+File.separator+dirIets3Os)
+    if(dirIets3Os.exists())dirIets3Os.deleteDir()
+    gitRepoClone(cloneDirectory,urlIets3Os)
+    git_checkout_update(cloneDirectory+File.separator+dirIets3Os)
 
-    //if(dirIets3core.exists())dirIets3core.deleteDir()
-    //gitRepoClone(cloneDirectory,urlIets3Core)
-    //git_checkout_update(cloneDirectory+File.separator+dirIets3core)
+    if(dirIets3core.exists())dirIets3core.deleteDir()
+    gitRepoClone(cloneDirectory,urlIets3Core)
+    git_checkout_update(cloneDirectory+File.separator+dirIets3core)
 
     if(dirMbeddr.exists())dirMbeddr.deleteDir()
     gitRepoClone(cloneDirectory,urlMbeddr)
