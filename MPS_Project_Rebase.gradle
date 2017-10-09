@@ -27,7 +27,7 @@ task cloneGitRepo() {
 
     if(dirMbeddr.exists())dirMbeddr.deleteDir()
     gitRepoClone(cloneDirectory,urlMbeddr)
-    //git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
+    git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
   }
 }
 
