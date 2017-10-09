@@ -5,7 +5,7 @@ node {
     
 	stage('build')
 		echo "Building on branch: ${env.BRANCH_NAME}"
-		sh "./gradlew -b build.gradle publish"
+		bat "./gradlew -b build.gradle publish"
         
 	stage'deploy'    
 		echo "Deployment stage"
