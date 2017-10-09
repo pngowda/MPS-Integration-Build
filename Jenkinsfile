@@ -14,7 +14,7 @@ node {
         
 	stage ('deploy'){
 		echo "Deployment stage"
-		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'admin',
+		withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '5adb1198-d66b-434a-aed1-56326f66567a',
                     usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {bat ''' echo %USERNAME%'''}
 	}
 	
