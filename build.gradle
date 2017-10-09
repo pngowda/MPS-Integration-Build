@@ -11,7 +11,8 @@ def setMPSVersion
 def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
 
 task MPSVersionTask {
-	def buildVersion = project.getProperty('mps_build')
+	//def buildVersion = project.getProperty('mps_build')
+	def buildVersion = '20172'
 	def inputIOFileList=new ArrayList()
 	def mpsVersionUrl="https://teamcity.jetbrains.com/guestAuth/app/rest/builds?pinned=true&status=SUCCESS&buildType=MPS_"+buildVersion+"_Distribution_DownloadableArtifacts&fields=build(number,status,lastChange,pinned)"
 	def headers = [ Accept: 'application/xml']
