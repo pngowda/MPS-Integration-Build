@@ -30,7 +30,7 @@ node {
 					//println Running on Windows slave
 					bat "${buildWrapper} -b ${buildFile} testrun"
 				}
-				//step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
+				step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
 
 
 		}

@@ -93,9 +93,6 @@ task buildrun{
 	println "build run"
 	println System.getenv('jdk_home')
 	def jdk_home=System.getenv('jdk_home')
-	if (hasProperty("jdk_home")) {
-		println "yes available"
-	}
 	if (file("$jdk_home/lib/tools.jar").isFile()) {
 	println file("$jdk_home/lib/tools.jar").isFile()
 	}
