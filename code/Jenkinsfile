@@ -10,11 +10,11 @@ node {
     stage ('build'){
         echo "Building on branch: ${env.BRANCH_NAME}"
         if(isUnix()) {
-            sh "%buildWrapper% -b %buildFile% buildrun"
+            sh "${buildWrapper} -b ${buildFile} buildrun"
         }
         else{
 		println buildWrapper
-            bat "buildWrapper -b buildFile buildrun"
+            bat "${buildWrapper} -b ${buildFile} buildrun"
         }
     }
 
@@ -22,10 +22,10 @@ node {
          echo "Running tests on branch: ${env.BRANCH_NAME}"
 		try {
 			if(isUnix()) {
-				sh "%buildWrapper% -b %buildFile% testrun"
+				sh "${buildWrapper} -b ${buildFile} testrun"
 			}
 			else{
-				bat "buildWrapper -b buildFile testrun"
+				bat "${buildWrapper} -b ${buildFile} testrun"
 			}
 			step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
 		}
