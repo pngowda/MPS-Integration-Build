@@ -91,5 +91,5 @@ task testrun{
 
 task buildrun{
 	println "build run"
-	println System.properties['java.home']
+	println "$System.env.JAVA_HOME"
 }
