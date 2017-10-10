@@ -47,7 +47,7 @@ node {
 			if(jobName){
 				env.isCIEnabled= true
 			}else{
-				env.isCIEnabled= 
+				env.isCIEnabled= null
 			}
         }
 	}
