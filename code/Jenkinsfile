@@ -2,7 +2,7 @@ node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	setupEnvironment()
-	printParams()
+	//printParams()
 	
 		stage ('checkout'){ 
 			echo "test"
@@ -41,9 +41,9 @@ node {
 		}
 	}
 	def setupEnvironment() {
-		def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
+		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 		script {
-            env.jdk_home = "${javaHome}"
+            //env.jdk_home = "${javaHome}"
         }
 	}
 
