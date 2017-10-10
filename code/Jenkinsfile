@@ -9,7 +9,6 @@ node {
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			echo "${javaHome}"
 			//script {
             //        env.jdk_home = "${javaHome}"
             //    }
