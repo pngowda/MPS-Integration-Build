@@ -95,7 +95,7 @@ task buildrun{
 	println System.getenv('isCIEnabled')
 	println System.getenv('JOB_NAMEE')
 	
-	if(System.getenv('JOB_NAMEE')){
+	if(System.getenv('JOB_NAME')){
 	   println "CI is enabled"
 	}else {
 	   println "CI is disabled"
