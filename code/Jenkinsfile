@@ -43,7 +43,7 @@ node {
 		def jobName = "${env.JOB_NAME}"
 		print "---"+jobName 
 		script {
-            env.jdk_home = "${javaHome}"
+            //env.jdk_home = "${javaHome}"
 			if(jobName){
 				env.isCIEnabled= "true"
 			}else{
