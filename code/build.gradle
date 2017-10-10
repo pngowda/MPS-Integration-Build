@@ -41,6 +41,7 @@ def downloadMPS(mpsDownloadUrlPath,mpsVersionString){
 
 task testrun{
 	println "test run"
+	println JAVA_HOME
 }
 
 task buildrun{
