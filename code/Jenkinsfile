@@ -10,7 +10,7 @@ node {
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			echo "user: ${env.USER}"
+			echo "user: ${USER}"
 			if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
