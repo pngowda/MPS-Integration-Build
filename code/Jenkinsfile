@@ -2,9 +2,6 @@ node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
-	
-	def customEnv = setupEnvironment()
-	withEnv(customEnv) {
 		stage ('checkout'){ 
 			echo "test"
 			checkout scm
@@ -41,11 +38,5 @@ node {
 
 
 		}
-	}
 }
-	def setupEnvironment() {
-	  def javaHome = tool(name: 'OpenJDK 8')
-	  def customEnv = ["PATH+JAVA_HOME=${javaHome}"]
-	  return customEnv
-	}
 
