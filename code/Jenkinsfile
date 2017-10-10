@@ -36,11 +36,10 @@ node {
 
 		}
 	}
-	
-  def setupEnvironment() {
-  def javaHome = tool(name: 'OpenJDK 8')
-  def customEnv = ["PATH+JDK=${javaHome}/bin", "PATH+JAVA_HOME=${javaHome}"]
-  return customEnv
 }
+	def setupEnvironment() {
+	  def javaHome = tool(name: 'OpenJDK 8')
+	  def customEnv = ["PATH+JDK=${javaHome}/bin", "PATH+JAVA_HOME=${javaHome}"]
+	  return customEnv
+	}
 
-}
