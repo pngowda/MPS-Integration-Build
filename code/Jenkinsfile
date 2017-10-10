@@ -45,9 +45,9 @@ node {
 		script {
             //env.jdk_home = "${javaHome}"
 			if(jobName){
-				env.isCIEnabled= false
+				env.isCIEnabled= ture
 			}else{
-				env.isCIEnabled= false
+				env.isCIEnabled= 
 			}
         }
 	}
