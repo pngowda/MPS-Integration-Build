@@ -1,7 +1,7 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
-	def javaHome = tool(name: 'OpenJDK 8')
+	def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 	
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
