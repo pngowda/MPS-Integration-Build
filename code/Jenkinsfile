@@ -1,7 +1,6 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
-	def jobName       = "${env.JOB_NAME}"
 	def branchName    = "${env.BRANCH_NAME}"
 	setupEnvironment()
 	//printParams()
@@ -41,7 +40,8 @@ node {
 	}
 	def setupEnvironment() {
 		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
-		  echo "${jobName}"
+		def jobName = "${env.JOB_NAME}"
+		echo "${jobName}"
 		script {
             //env.jdk_home = "${javaHome}"
         }
