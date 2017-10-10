@@ -10,7 +10,7 @@ node {
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			echo "user: ${USER}"
+			echo "user: ${env.USER}"
 			if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
@@ -42,5 +42,13 @@ node {
 		script {
             env.jdk_home = "${javaHome}"
         }
+		script {
+        sh 'env > env.txt'
+        String[] envs = readFile('env.txt').split("\r?\n")
+
+        for(String vars: envs){
+            println(vars)
+        }
+    }
 	}
 
