@@ -3,7 +3,7 @@ node {
 	def buildWrapper  = './code/gradlew'
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
-		println test
+		echo test
 		stage ('checkout'){ 
 			checkout scm
 		}
