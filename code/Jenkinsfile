@@ -3,8 +3,9 @@ node {
 	def buildWrapper  = './code/gradlew'
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
-		echo test
 		stage ('checkout'){ 
+			echo test
+			${env.JAVA_HOME}
 			checkout scm
 		}
 		stage ('build'){
