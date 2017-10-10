@@ -1,6 +1,8 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
+	def javaHome = tool(name: 'OpenJDK 8')
+	
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
 		stage ('checkout'){ 
