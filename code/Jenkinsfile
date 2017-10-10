@@ -10,9 +10,8 @@ node {
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			echo "user: ${env.LOGNAME}"
-			bat 'printenv'
-			if(isUnix()) {
+			echo "user: ${env.BUILD_USER_ID}"
+		    if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
 			}
