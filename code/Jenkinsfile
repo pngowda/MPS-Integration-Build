@@ -1,17 +1,14 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
-	//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 	setupEnvironment()
+	
 		stage ('checkout'){ 
 			echo "test"
 			checkout scm
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			//script {
-            //        env.jdk_home = "${javaHome}"
-            //    }
             echo "${env.jdk_home}"
 			if(isUnix()) {
 				//println Running on Linux slave
