@@ -93,7 +93,8 @@ task buildrun{
 	println "build run"
 	println System.getenv('JAVA_HOME')
 	def jdk_home=System.getenv('JAVA_HOME')
-	if (!file("$jdk_home/lib/tools.jar").isFile()) {
-        throw new GradleException("Was not able to locate jdk home folder. Use 'jdk_home' project variable to specify JDK location explicitly. Current JAVA_HOME is: $java_home")
-    }
+	if (file("$jdk_home/lib/tools.jar").isFile()) {
+	println file("$jdk_home/lib/tools.jar").isFile()
+	}
+        
 }
