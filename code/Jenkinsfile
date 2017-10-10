@@ -11,11 +11,11 @@ node {
         echo "Building on branch: ${env.BRANCH_NAME}"
         if(isUnix()) {
 			//println Running on Linux slave
-            //sh "${buildWrapper} -b ${buildFile} buildrun"
+            sh "${buildWrapper} -b ${buildFile} buildrun"
         }
         else{
 			//println Running on Windows slave
-            //bat "${buildWrapper} -b ${buildFile} buildrun"
+            bat "${buildWrapper} -b ${buildFile} buildrun"
         }
     }
 
@@ -24,11 +24,11 @@ node {
 
 			if(isUnix()) {
 				//println Running on Linux slave
-				//sh "${buildWrapper} -b ${buildFile} testrun"
+				sh "${buildWrapper} -b ${buildFile} testrun"
 			}
 			else{
 				//println Running on Windows slave
-				//bat "${buildWrapper} -b ${buildFile} testrun"
+				bat "${buildWrapper} -b ${buildFile} testrun"
 			}
 			//step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
 
