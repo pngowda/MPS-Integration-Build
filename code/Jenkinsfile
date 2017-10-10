@@ -2,11 +2,12 @@ node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	setupEnvironment()
-	def isCiEnv = ${env.USER}
+
 	
 		stage ('checkout'){ 
 			echo "test"
 			checkout scm
+			def isCiEnv = ${env.USER}
 			echo ${isCiEnv}
 		}
 		stage ('build'){
