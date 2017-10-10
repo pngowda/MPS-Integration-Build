@@ -1,6 +1,6 @@
 node {
-	def JAVA_HOME = tool 'OpenJDK 8'
-	println JAVA_HOME
+	//def JAVA_HOME = tool 'OpenJDK 8'
+	//println JAVA_HOME
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	
