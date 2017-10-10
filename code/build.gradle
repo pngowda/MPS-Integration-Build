@@ -91,4 +91,5 @@ task testrun{
 
 task buildrun{
 	println "build run"
+	println JAVA_HOME
 }
