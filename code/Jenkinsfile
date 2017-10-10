@@ -12,6 +12,10 @@ node {
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
 			echo "${javaHome}"
+			script {
+                    env.JAVA_HOME = "${javaHome}"
+                }
+            echo "${env.JAVA_HOME}"
 			if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
