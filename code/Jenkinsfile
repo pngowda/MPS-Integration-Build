@@ -10,7 +10,10 @@ node {
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
-			echo "user: ${env.BUILD_USER_ID}"
+			wrap([$class: 'BuildUser']) {
+				def user = env.BUILD_USER_ID
+			}
+			echo "Building on branch: user"
 		    if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
