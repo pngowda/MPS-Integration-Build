@@ -2,7 +2,7 @@ node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	setupEnvironment()
-printParams()
+	printParams()
 	
 		stage ('checkout'){ 
 			echo "test"
@@ -44,8 +44,9 @@ printParams()
         }
 	}
 
-@NonCPS
+
 def printParams() {
-  env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
+  //env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
+  println "test"
 }
 
