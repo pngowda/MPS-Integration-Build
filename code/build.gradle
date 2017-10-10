@@ -1,3 +1,4 @@
+/*
 import groovy.io.FileType
 apply plugin: 'base'
 apply plugin: 'maven-publish'
@@ -10,7 +11,8 @@ def mpsVersion
 def setMPSVersion
 def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
 
-/*task MPSVersionTask {
+
+task MPSVersionTask {
 	//def buildVersion = project.getProperty('mps_build')
 	def buildVersion = '20172'
 	def inputIOFileList=new ArrayList()
@@ -79,12 +81,12 @@ publishing {
             url mpsUploadURepo
         }
     }
-} */
+} 
+*/
 
 
 task testrun{
 	println "test run"
-	println JAVA_HOME
 }
 
 task buildrun{
