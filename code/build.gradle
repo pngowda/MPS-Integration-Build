@@ -10,7 +10,7 @@ def mpsVersion
 def setMPSVersion
 def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
 
-task MPSVersionTask {
+/*task MPSVersionTask {
 	//def buildVersion = project.getProperty('mps_build')
 	def buildVersion = '20172'
 	def inputIOFileList=new ArrayList()
@@ -39,14 +39,6 @@ def downloadMPS(mpsDownloadUrlPath,mpsVersionString){
 	file.close()
 }
 
-task testrun{
-	println "test run"
-	println JAVA_HOME
-}
-
-task buildrun{
-	println "build run"
-}
 task unzipMPS(dependsOn: MPSVersionTask) {
 	inputs.file mpsDownloadFile
 	outputs.dir mpsDownloadDir
@@ -87,4 +79,14 @@ publishing {
             url mpsUploadURepo
         }
     }
+} */
+
+
+task testrun{
+	println "test run"
+	println JAVA_HOME
+}
+
+task buildrun{
+	println "build run"
 }
