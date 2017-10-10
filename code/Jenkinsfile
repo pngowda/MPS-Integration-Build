@@ -13,9 +13,9 @@ node {
 			echo "Building on branch: ${env.BRANCH_NAME}"
 			echo "${javaHome}"
 			script {
-                    env.JAVA_HOME = "${javaHome}"
+                    env.jdk_home = "${javaHome}"
                 }
-            echo "${env.JAVA_HOME}"
+            echo "${env.jdk_home}"
 			if(isUnix()) {
 				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
