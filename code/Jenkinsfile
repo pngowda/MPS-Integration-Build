@@ -1,7 +1,8 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
-	def JenkinsJob = "${env.JOB_NAME}"
+	def jobName       = "${env.JOB_NAME}"
+	def branchName    = "${env.BRANCH_NAME}"
 	setupEnvironment()
 	//printParams()
 	
@@ -10,7 +11,7 @@ node {
 			checkout scm
 		}
 		stage ('build'){
-			echo "Building on branch: ${env.BRANCH_NAME}"
+			echo "Building on branch: ${branchName}"
 			echo "Building : ${env.JOB_NAME}"
 		    if(isUnix()) {
 				//println Running on Linux slave
@@ -23,7 +24,7 @@ node {
 		}
 
 		stage ('test'){
-			 echo "Running tests on branch: ${env.BRANCH_NAME}"
+			 echo "Running tests on branch: ${branchName}"
 
 				if(isUnix()) {
 					//println Running on Linux slave
@@ -40,6 +41,7 @@ node {
 	}
 	def setupEnvironment() {
 		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
+		  println "---"+ jobName
 		script {
             //env.jdk_home = "${javaHome}"
         }
