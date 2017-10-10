@@ -1,6 +1,7 @@
 node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
+	def JenkinsJob = "${env.JOB_NAME}"
 	setupEnvironment()
 	//printParams()
 	
