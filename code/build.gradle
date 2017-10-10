@@ -93,6 +93,14 @@ task buildrun{
 	println "build run"
 	println System.getenv('jdk_home')
 	println System.getenv('isCIEnabled')
+	
+	if(System.getenv('isCIEnabled')){
+	   println "CI is enabled"
+	}else {
+	   println "CI is disabled"
+	}
+	
+	
 	def jdk_home=System.getenv('jdk_home')
 	if (file("$jdk_home/lib/tools.jar").isFile()) {
 	println file("$jdk_home/lib/tools.jar").isFile()
