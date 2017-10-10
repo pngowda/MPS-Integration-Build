@@ -13,7 +13,8 @@ node {
             sh "%buildWrapper% -b %buildFile% buildrun"
         }
         else{
-            bat "%buildWrapper% -b %buildFile% buildrun"
+		println buildWrapper
+            bat "buildWrapper -b buildFile buildrun"
         }
     }
 
@@ -24,7 +25,7 @@ node {
 				sh "%buildWrapper% -b %buildFile% testrun"
 			}
 			else{
-				bat "%buildWrapper% -b %buildFile% testrun"
+				bat "buildWrapper -b buildFile testrun"
 			}
 			step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
 		}
