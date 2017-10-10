@@ -4,8 +4,8 @@ node {
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
 		stage ('checkout'){ 
-			echo test
-			${env.JAVA_HOME}
+			echo "test"
+			echo ${env.JAVA_HOME}
 			checkout scm
 		}
 		stage ('build'){
