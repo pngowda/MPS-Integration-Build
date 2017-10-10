@@ -3,7 +3,7 @@ node {
 	def buildWrapper  = './code/gradlew'
 	def customEnv = setupEnvironment()
 	withEnv(customEnv) {
-		println javaHome
+		println customEnv.JAVA_HOME
 		stage ('checkout'){ 
 			checkout scm
 		}
@@ -38,7 +38,7 @@ node {
 }
 	def setupEnvironment() {
 	  def javaHome = tool(name: 'OpenJDK 8')
-	  def customEnv = ["PATH+JDK=${javaHome}/bin", "PATH+JAVA_HOME=${javaHome}"]
+	  def customEnv = ["PATH+JAVA_HOME=${javaHome}"]
 	  return customEnv
 	}
 
