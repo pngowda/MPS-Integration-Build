@@ -2,7 +2,7 @@ node {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	setupEnvironment()
-
+printParams()
 	
 		stage ('checkout'){ 
 			echo "test"
@@ -42,13 +42,10 @@ node {
 		script {
             env.jdk_home = "${javaHome}"
         }
-		script {
-        sh 'env > env.txt'
-        String[] envs = readFile('env.txt').split("\r?\n")
-
-        for(String vars: envs){
-            println(vars)
-        }
-    }
 	}
+
+@NonCPS
+def printParams() {
+  env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
+}
 
