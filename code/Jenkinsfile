@@ -41,9 +41,14 @@ node {
 	def setupEnvironment() {
 		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 		def jobName = "${env.JOB_NAME}"
-		echo "----- ${jobName}"
+		print "---"+jobName 
 		script {
-            //env.jdk_home = "${javaHome}"
+            env.jdk_home = "${javaHome}"
+			if(jobName){
+				env.isCIEnabled= "true"
+			}else{
+				env.isCIEnabled= "false"
+			}
         }
 	}
 
