@@ -41,7 +41,7 @@ node {
 	def setupEnvironment() {
 		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 		def jobName = "${env.JOB_NAME}"
-		echo "${jobName}"
+		echo "----- ${jobName}"
 		script {
             //env.jdk_home = "${javaHome}"
         }
