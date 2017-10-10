@@ -91,5 +91,5 @@ task testrun{
 
 task buildrun{
 	println "build run"
-	println System.getenv('JAVA_HOME')
+	println System.getenv('ANT_HOME')
 }
