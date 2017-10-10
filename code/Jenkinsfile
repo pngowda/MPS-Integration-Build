@@ -7,7 +7,6 @@ node {
 		stage ('checkout'){ 
 			echo "test"
 			checkout scm
-			echo ${isCiEnv}
 		}
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
