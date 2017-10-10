@@ -3,35 +3,44 @@ node {
 	println JAVA_HOME
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
-	
-    stage ('checkout'){ 
-        checkout scm
-    }
-    stage ('build'){
-        echo "Building on branch: ${env.BRANCH_NAME}"
-        if(isUnix()) {
-			//println Running on Linux slave
-            sh "${buildWrapper} -b ${buildFile} buildrun"
-        }
-        else{
-			//println Running on Windows slave
-            bat "${buildWrapper} -b ${buildFile} buildrun"
-        }
-    }
-
-    stage ('test'){
-         echo "Running tests on branch: ${env.BRANCH_NAME}"
-
+	def customEnv = setupEnvironment()
+	withEnv(customEnv) {
+		stage ('checkout'){ 
+			checkout scm
+		}
+		stage ('build'){
+			echo "Building on branch: ${env.BRANCH_NAME}"
 			if(isUnix()) {
 				//println Running on Linux slave
-				sh "${buildWrapper} -b ${buildFile} testrun"
+				sh "${buildWrapper} -b ${buildFile} buildrun"
 			}
 			else{
 				//println Running on Windows slave
-				bat "${buildWrapper} -b ${buildFile} testrun"
+				bat "${buildWrapper} -b ${buildFile} buildrun"
 			}
-			//step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
+		}
+
+		stage ('test'){
+			 echo "Running tests on branch: ${env.BRANCH_NAME}"
+
+				if(isUnix()) {
+					//println Running on Linux slave
+					sh "${buildWrapper} -b ${buildFile} testrun"
+				}
+				else{
+					//println Running on Windows slave
+					bat "${buildWrapper} -b ${buildFile} testrun"
+				}
+				//step([$class: 'JUnitResultArchiver', testResults: '*/TEST-*.xml'])
 
 
+		}
 	}
+	
+  def setupEnvironment() {
+  def javaHome = tool(name: 'OpenJDK 8')
+  def customEnv = ["PATH+JDK=${javaHome}/bin", "PATH+JAVA_HOME=${javaHome}"]
+  return customEnv
+}
+
 }
