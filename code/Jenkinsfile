@@ -1,4 +1,4 @@
-node {
+node ('master') {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	def branchName    = "${env.BRANCH_NAME}"
