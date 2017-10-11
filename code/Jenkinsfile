@@ -24,7 +24,7 @@ node {
 
 		stage ('test'){
 			 echo "Running tests on branch: ${branchName}"
-
+		try {
 				if(isUnix()) {
 					//println Running on Linux slave
 					sh "${buildWrapper} -b ${buildFile} testrun"
@@ -34,6 +34,10 @@ node {
 					bat "${buildWrapper} -b ${buildFile} testrun"
 				}
 				step([$class: 'JUnitResultArchiver', testResults: 'TEST-*.xml'])
+		}
+		catch(err) {
+			echo "### There were test failures:\n${err}"
+		}
 
 
 		}
@@ -41,7 +45,6 @@ node {
 	def setupEnvironment() {
 		//def javaHome = tool(name: 'Oracle JDK8 Autoinstall')
 		def jobName = "${env.JOB_NAME}"
-		print "---"+jobName 
 		script {
             //env.jdk_home = "${javaHome}"
 			if(jobName){
