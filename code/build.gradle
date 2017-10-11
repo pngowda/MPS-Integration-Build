@@ -91,12 +91,19 @@ task testrun{
 
 task buildrun{
 	println "build run"
-	println System.getenv('jdk_home')
-	println System.getenv('isCIEnabled')
-	println System.getProperty('USER')
-	System.getProperties().each {println it}
+	//println System.getenv('jdk_home')
+	//println System.getenv('isCIEnabled')
 	
-	System.getenv().each {println it}
+	println "-------------------"
+	println System.getenv('nexusUsername')
+	println "-------------------"
+	println System.getProperty('nexusUsername')	
+	println "-------------------"
+	//println System.getProperty('USER')
+	
+	//System.getProperties().each {println it}
+	//println "-------------------"
+	//System.getenv().each {println it}
 	
 	if(System.getenv('USER')!=null && System.getenv('USER').equalsIgnoreCase("jenkins")){
 	   println "CI is enabled"
@@ -106,7 +113,7 @@ task buildrun{
 	
 	def jdk_home=System.getenv('CI_jdk_home')
 	if (file("$jdk_home/lib/tools.jar").isFile()) {
-	println file("$jdk_home/lib/tools.jar").isFile()
+	//println file("$jdk_home/lib/tools.jar").isFile()
 	}
         
 }
