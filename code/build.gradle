@@ -97,8 +97,7 @@ task buildrun{
 	println "-------------------"
 	println System.getenv('nexusUsername')
 	println "-------------------"
-	println System.getProperty('nexusUsername')	
-	println "-------------------"
+
 	//println System.getProperty('USER')
 	
 	//System.getProperties().each {println it}
