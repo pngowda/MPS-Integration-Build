@@ -4,7 +4,9 @@ node() {
 	def branchName    = "${env.BRANCH_NAME}"
 	//setupEnvironment()
 	//printParams()
-	
+	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '2bf4d7e9-37c7-4436-b459-b40187d8488a',
+            usernameVariable: 'nexusUsername', passwordVariable: 'nexusPassword']])
+			{
 		stage ('checkout'){ 
 			echo "test"
 			checkout scm
@@ -12,9 +14,7 @@ node() {
 		stage ('build'){
 			echo "Building on branch: ${branchName}"
 			echo "Building : ${env.JOB_NAME}"
-			withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '2bf4d7e9-37c7-4436-b459-b40187d8488a',
-            usernameVariable: 'nexusUsername', passwordVariable: 'nexusPassword']])
-			{
+			
 			echo "${nexusUsername}"
 						
 		    if(isUnix()) {
@@ -24,7 +24,7 @@ node() {
 			else{
 				bat "${buildWrapper} -b ${buildFile} buildrun"
 			}
-			}
+			
 		}
 
 		stage ('test'){
@@ -44,6 +44,7 @@ node() {
 		}
 
 
+		}
 		}
 	}
 	def setupEnvironment() {
