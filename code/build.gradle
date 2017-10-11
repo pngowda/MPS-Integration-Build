@@ -93,7 +93,7 @@ task buildrun{
 	println "build run"
 	println System.getenv('jdk_home')
 	println System.getenv('isCIEnabled')
-	println System.getenv("user.name")
+	println System.getenv("HOME")
 	
 	if(System.getenv('JOB_NAME')){
 	   println "CI is enabled"
