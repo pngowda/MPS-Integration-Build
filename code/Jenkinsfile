@@ -1,4 +1,4 @@
-node {
+node('windows') {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	def branchName    = "${env.BRANCH_NAME}"
