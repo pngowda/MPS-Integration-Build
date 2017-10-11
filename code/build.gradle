@@ -94,9 +94,6 @@ task buildrun{
 	println System.getenv('jdk_home')
 	println System.getenv('isCIEnabled')
 	println System.getProperty('USER')
-	System.getProperties().each {println it}
-	
-	System.getenv().each {println it}
 	
 	if(System.getenv('JOB_NAME')){
 	   println "CI is enabled"
