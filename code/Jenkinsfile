@@ -13,8 +13,8 @@ node('master') {
 			echo "Building on branch: ${branchName}"
 			echo "Building : ${env.JOB_NAME}"
 		    if(isUnix()) {
-				sh "chmod +x gradlew"
-				sh "./gradlew -b ${buildFile} buildrun"
+				sh "chmod +x ${buildWrapper}"
+				sh "${buildWrapper} -b ${buildFile} buildrun"
 			}
 			else{
 				bat "${buildWrapper} -b ${buildFile} buildrun"
@@ -25,8 +25,8 @@ node('master') {
 			 echo "Running tests on branch: ${branchName}"
 		try {
 				if(isUnix()) {
-					sh "chmod +x gradlew"
-					sh "./gradlew ${gradleOpts} -b ${buildFile} testrun"
+					sh "chmod +x ${buildWrapper}"
+					sh "${buildWrapper} -b ${buildFile} testrun"
 				}
 				else{
 					bat "${buildWrapper} -b ${buildFile} testrun"
