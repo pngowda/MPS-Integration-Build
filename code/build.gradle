@@ -98,7 +98,7 @@ task buildrun{
 	
 	System.getenv().each {println it}
 	
-	if(System.getenv('USER')){
+	if(System.getenv('USER')!=null && System.getenv('USER').equalsIgnoreCase("jenkins")){
 	   println "CI is enabled"
 	}else {
 	   println "CI is disabled"
