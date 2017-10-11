@@ -101,6 +101,12 @@ task buildrun{
 	   println "CI is disabled"
 	}
 	
+	
+	
+	System.getProperty().each {prinln it}
+	println "jjjjj"	
+		
+	System.getenv().each {prinln it}
 	def jdk_home=System.getenv('CI_jdk_home')
 	if (file("$jdk_home/lib/tools.jar").isFile()) {
 	println file("$jdk_home/lib/tools.jar").isFile()
