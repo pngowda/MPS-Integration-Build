@@ -93,20 +93,17 @@ task buildrun{
 	println "build run"
 	println System.getenv('jdk_home')
 	println System.getenv('isCIEnabled')
-	println System.getenv('USER')
+	println System.getProperty('USER')
+	System.getProperties().each {println it}
 	
-	if(System.getenv('USER')!=null && System.getenv('USER').equalsIgnoreCase("jenkins")){
+	System.getenv().each {println it}
+	
+	if(System.getenv('USER')){
 	   println "CI is enabled"
 	}else {
 	   println "CI is disabled"
 	}
 	
-	
-	
-	println System.getProperty().each {prinln it}
-	println "jjjjj"	
-		
-	println System.getenv().each {prinln it}
 	def jdk_home=System.getenv('CI_jdk_home')
 	if (file("$jdk_home/lib/tools.jar").isFile()) {
 	println file("$jdk_home/lib/tools.jar").isFile()
