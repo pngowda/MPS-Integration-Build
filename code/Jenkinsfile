@@ -2,7 +2,7 @@ node() {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	def branchName    = "${env.BRANCH_NAME}"
-	setupEnvironment()
+	//setupEnvironment()
 	//printParams()
 	
 		stage ('checkout'){ 
