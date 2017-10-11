@@ -13,11 +13,9 @@ node ('master') {
 			echo "Building on branch: ${branchName}"
 			echo "Building : ${env.JOB_NAME}"
 		    if(isUnix()) {
-				//println Running on Linux slave
 				sh "${buildWrapper} -b ${buildFile} buildrun"
 			}
 			else{
-				//println Running on Windows slave
 				bat "${buildWrapper} -b ${buildFile} buildrun"
 			}
 		}
@@ -26,11 +24,9 @@ node ('master') {
 			 echo "Running tests on branch: ${branchName}"
 		try {
 				if(isUnix()) {
-					//println Running on Linux slave
 					sh "${buildWrapper} -b ${buildFile} testrun"
 				}
 				else{
-					//println Running on Windows slave
 					bat "${buildWrapper} -b ${buildFile} testrun"
 				}
 				step([$class: 'JUnitResultArchiver', testResults: 'TEST-*.xml'])
