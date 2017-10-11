@@ -1,4 +1,4 @@
-node('windows') {
+node('master') {
 	def buildFile     = './code/build.gradle'
 	def buildWrapper  = './code/gradlew'
 	def branchName    = "${env.BRANCH_NAME}"
@@ -13,7 +13,7 @@ node('windows') {
 			echo "Building on branch: ${branchName}"
 			echo "Building : ${env.JOB_NAME}"
 		    if(isUnix()) {
-				sh "${buildWrapper} -b ${buildFile} buildrun"
+				sh "./gradlew -b ${buildFile} buildrun"
 			}
 			else{
 				bat "${buildWrapper} -b ${buildFile} buildrun"
@@ -24,7 +24,7 @@ node('windows') {
 			 echo "Running tests on branch: ${branchName}"
 		try {
 				if(isUnix()) {
-					sh "${buildWrapper} -b ${buildFile} testrun"
+					sh "./gradlew ${gradleOpts} -b ${buildFile} testrun"
 				}
 				else{
 					bat "${buildWrapper} -b ${buildFile} testrun"
