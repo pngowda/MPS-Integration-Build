@@ -17,9 +17,9 @@ task cloneGitRepo() {
   doLast {
     def cloneDirectory=System.getProperty("user.dir")
 
-    if(dirIets3Os.exists())dirIets3Os.deleteDir()
-    gitRepoClone(cloneDirectory,urlIets3Os)
-    git_checkout_update(cloneDirectory+File.separator+dirIets3Os)
+    //if(dirIets3Os.exists())dirIets3Os.deleteDir()
+    //gitRepoClone(cloneDirectory,urlIets3Os)
+    //git_checkout_update(cloneDirectory+File.separator+dirIets3Os)
 
     //if(dirIets3core.exists())dirIets3core.deleteDir()
     //gitRepoClone(cloneDirectory,urlIets3Core)
