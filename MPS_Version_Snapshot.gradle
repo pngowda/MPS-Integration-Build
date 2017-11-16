@@ -1,0 +1,118 @@
+/*
+import groovy.io.FileType
+apply plugin: 'base'
+apply plugin: 'maven-publish'
+	
+def mpsDownloadDir
+def mpsDownloadFile
+def mpsUnpackedDir
+def uploadVersion
+def mpsVersion
+def setMPSVersion
+def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
+
+
+task MPSVersionTask {
+	//def buildVersion = project.getProperty('mps_build')
+	def buildVersion = '20172'
+	def inputIOFileList=new ArrayList()
+	def mpsVersionUrl="https://teamcity.jetbrains.com/guestAuth/app/rest/builds?pinned=true&status=SUCCESS&buildType=MPS_"+buildVersion+"_Distribution_DownloadableArtifacts&fields=build(number,status,lastChange,pinned)"
+	def headers = [ Accept: 'application/xml']
+	def xmlText = new URL(mpsVersionUrl).getText( requestProperties: headers )
+	def parsedProjectXml = new XmlSlurper().parseText( xmlText )
+	parsedProjectXml.build.each {
+		build -> if((build.@pinned)=="true"){
+				inputIOFileList.add(build.@number)
+		}
+	}
+	mpsVersion=inputIOFileList.first()
+	println "Last Pinned MPS Version "+buildVersion+"--> " +mpsVersion
+	def mpsDownloadUrl='https://teamcity.jetbrains.com/guestAuth/repository/download/MPS_'+buildVersion+'_Distribution_DownloadableArtifacts/.lastPinned/'+mpsVersion+'.zip'
+	downloadMPS(mpsDownloadUrl,mpsVersion)
+	mpsDownloadDir = new File(System.getProperty("user.dir"), mpsVersion.toString())
+	mpsDownloadFile = new File(mpsVersion.toString()+".zip")
+}
+
+
+def downloadMPS(mpsDownloadUrlPath,mpsVersionString){
+	def url = mpsDownloadUrlPath
+	def file = new File(mpsVersionString.toString()+'.zip').newOutputStream()
+	file << new URL(url).openStream()
+	file.close()
+}
+
+task unzipMPS(dependsOn: MPSVersionTask) {
+	inputs.file mpsDownloadFile
+	outputs.dir mpsDownloadDir
+	ant.unzip src: mpsDownloadFile, dest: mpsDownloadDir
+	def dirList = new ArrayList()
+	def dir = new File(mpsDownloadDir.toString())
+	dirList=dir.list()
+	mpsUnpackedDir = new File(mpsDownloadDir, dirList[0])
+	uploadVersion = dirList[0]
+}
+
+
+task publishMPS(type: Zip, dependsOn: unzipMPS) {
+	setMPSVersion=mpsVersion.toString()+'-SNAPSHOT'
+	println "##teamcity[setParameter name='env.mpsVersion' value='${setMPSVersion}']"
+    from mpsUnpackedDir
+}
+
+artifacts {
+    'default' publishMPS
+}
+
+publishing {
+    publications {
+        mps(MavenPublication) {
+				groupId 'com.jetbrains'
+				artifactId 'mps'
+				artifact publishMPS
+				version setMPSVersion
+			}
+        }
+	repositories {
+        maven {
+            credentials {
+				username env.Username
+				password env.Password
+            }
+            url mpsUploadURepo
+        }
+    }
+} 
+*/
+
+
+task testrun{
+	println "test run"
+}
+
+task buildrun{
+	println "build run"
+	//println System.getenv('jdk_home')
+	//println System.getenv('isCIEnabled')
+	
+	println "-------------------"
+	println System.getenv('nexusUsername')
+	println "-------------------"
+
+	//println System.getProperty('USER')
+	
+	//System.getProperties().each {println it}
+	//println "-------------------"
+	//System.getenv().each {println it}
+	
+	if(System.getenv('USER')!=null && System.getenv('USER').equalsIgnoreCase("jenkins")){
+	   println "CI is enabled"
+	}else {
+	   println "CI is disabled"
+	}
+	
+	def jdk_home=System.getenv('CI_jdk_home')
+	if (file("$jdk_home/lib/tools.jar").isFile()) {
+	//println file("$jdk_home/lib/tools.jar").isFile()
+	}
+        
+}
