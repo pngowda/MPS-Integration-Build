@@ -84,6 +84,7 @@ publishing {
 
 
 
+/*
 task testrun{
 	println "test run"
 }
@@ -115,3 +116,4 @@ task buildrun{
 	}
         
 }
+*/
