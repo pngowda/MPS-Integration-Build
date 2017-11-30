@@ -17,8 +17,10 @@ dependencies {
 repositories {
     maven {
         url 'https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots'
-		username project.nexusUsername
-        password project.nexusPassword
+		credentials {
+			username project.nexusUsername
+			password project.nexusPassword
+        }
     }
 }
 
