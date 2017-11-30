@@ -6,6 +6,19 @@ buildscript {
 import org.ajoberstar.grgit.Grgit
 import org.ajoberstar.gradle.git.tasks.*
 
+dependencies {
+    mps 'com.jetbrains:mps:MPS-172.1493-SNAPSHOT'
+}
+
+repositories {
+    maven {
+        url 'https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots'
+		username project.nexusUsername
+        password project.nexusPassword
+    }
+}
+
+
 task cloneGitRepo() {
   File dirIets3Os = new File('iets3.opensource')
   File dirIets3core = new File('iets3.core')
@@ -28,6 +41,7 @@ task cloneGitRepo() {
     if(dirMbeddr.exists())dirMbeddr.deleteDir()
     gitRepoClone(cloneDirectory,urlMbeddr)
     git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
+	
 	//git_push_changes(cloneDirectory+File.separator+dirMbeddr)
   }
 }
@@ -99,3 +113,6 @@ def git_push_changes(){
   println "${proc6.err.text}"
   println "${proc6.in.text}"
 }
+
+
+
