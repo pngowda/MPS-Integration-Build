@@ -6,6 +6,10 @@ buildscript {
 import org.ajoberstar.grgit.Grgit
 import org.ajoberstar.gradle.git.tasks.*
 
+configurations {
+    mps
+}
+
 dependencies {
     mps 'com.jetbrains:mps:MPS-172.1493-SNAPSHOT'
 }
