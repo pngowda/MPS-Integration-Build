@@ -83,6 +83,8 @@ def git_checkout_update(destinationFolder){
   println "Process exit code: ${proc5.exitValue()}"
   println "${proc5.err.text}"
   println "${proc5.in.text}"
+  
+  }
 
 def git_push_changes(){
 
