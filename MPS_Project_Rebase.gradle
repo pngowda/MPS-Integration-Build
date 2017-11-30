@@ -28,6 +28,7 @@ task cloneGitRepo() {
     if(dirMbeddr.exists())dirMbeddr.deleteDir()
     gitRepoClone(cloneDirectory,urlMbeddr)
     git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
+	//git_push_changes(cloneDirectory+File.separator+dirMbeddr)
   }
 }
 
@@ -82,6 +83,13 @@ def git_checkout_update(destinationFolder){
   println "Process exit code: ${proc5.exitValue()}"
   println "${proc5.err.text}"
   println "${proc5.in.text}"
+
+def git_push_changes(){
+
+  System.setProperty("user.dir", new File(destinationFolder).getAbsolutePath())
+  println "GIT project directory: "+destinationFolder
+
+  def command6 = "git push origin Integration-Build"
 
   def proc6 = command6.execute(null, new File(System.getProperty("user.dir")))
   proc6.waitFor()
