@@ -74,8 +74,8 @@ publishing {
 	repositories {
         maven {
             credentials {
-				username project.nexusUsername
-				password project.nexusPassword
+				username System.getenv('nexusUsername')
+				password System.getenv('nexusPassword')
             }
             url mpsUploadURepo
         }
