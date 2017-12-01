@@ -1,5 +1,6 @@
 node('master') {
-	def buildFile     = './MPS_Version_Snapshot.gradle'
+	def buildFile1     = './MPS_Version_Snapshot_local.gradle'
+	def buildFile2     = './MPS_Project_Rebase_local.gradle'
 	def buildWrapper  = './gradlew'
 	
 		stage ('checkout'){ 
@@ -9,10 +10,10 @@ node('master') {
 			echo "Building on branch: ${env.BRANCH_NAME}"
 			if(isUnix()) {
 				sh "chmod +x ${buildWrapper}"
-				sh "${buildWrapper} -b ${buildFile} publish"
+				sh "${buildWrapper} -b ${buildFile1} publish"
 			}
 			else{
-				bat "${buildWrapper} -b ${buildFile} publish"
+				bat "${buildWrapper} -b ${buildFile1} publish"
 			}
 		}
 
@@ -21,10 +22,10 @@ node('master') {
 		try {
 			 if(isUnix()) {
 				sh "chmod +x ${buildWrapper}"
-				sh "${buildWrapper} -b ${buildFile} publish"
+				sh "${buildWrapper} -b ${buildFile2} cloneGitRepo"
 			}
 			else{
-				bat "${buildWrapper} -b ${buildFile} publish"
+				bat "${buildWrapper} -b ${buildFile2} cloneGitRepo"
 			}
 			
 		}
