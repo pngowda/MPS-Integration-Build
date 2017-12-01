@@ -8,7 +8,7 @@ def mpsUnpackedDir
 def uploadVersion
 def mpsVersion
 def setMPSVersion
-def mpsUploadURepo="http://gowda:9091/nexus/content/repositories/MyRepo/"
+def mpsUploadURepo="http://172.16.2.107:9091/nexus/content/repositories/MyRepo/"
 
 
 task MPSVersionTask {
