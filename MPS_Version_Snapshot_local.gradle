@@ -74,8 +74,8 @@ publishing {
 	repositories {
         maven {
             credentials {
-				username 'pngowda'
-				password 'test123'
+				username 'admin'
+				password 'admin123'
             }
             url mpsUploadURepo
         }
