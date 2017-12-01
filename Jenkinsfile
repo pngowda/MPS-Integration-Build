@@ -1,5 +1,5 @@
 node('master') {
-	def buildFile     = './MPS_Version_Snapshot.gradle
+	def buildFile     = './MPS_Version_Snapshot.gradle'
 	def buildWrapper  = './gradlew'
 	
 		stage ('checkout'){ 
