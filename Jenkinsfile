@@ -16,7 +16,7 @@ node('master') {
 				sh "${buildWrapper} -b ${buildFile1} publish"
 			}
 			else{
-				bat "${buildWrapper} -b ${buildFile1} publish"
+				//bat "${buildWrapper} -b ${buildFile1} publish"
 			}
 		}
 
