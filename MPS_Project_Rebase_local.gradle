@@ -16,10 +16,10 @@ dependencies {
 
 repositories {
     maven {
-        url 'https://projects.itemis.de/nexus/content/repositories/mbeddr'
+        url 'http://gowda:9091/nexus/content/repositories/MyRepo/'
 		credentials {
-			username project.nexusUsername
-			password project.nexusPassword
+			username 'pngowda'
+			password 'test123'
         }
     }
 }
