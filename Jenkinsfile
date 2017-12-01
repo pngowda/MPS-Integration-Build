@@ -16,7 +16,7 @@ node('master') {
 				sh "${buildWrapper} -b ${buildFile1} publish"
 			}
 			else{
-				//bat "${buildWrapper} -b ${buildFile1} publish"
+				bat "${buildWrapper} -b ${buildFile1} publish"
 			}
 		}
 
@@ -28,7 +28,7 @@ node('master') {
 				sh "${buildWrapper} -b ${buildFile2} cloneGitRepo"
 			}
 			else{
-				bat "${buildWrapper} -b ${buildFile2} cloneGitRepo"
+				//bat "${buildWrapper} -b ${buildFile2} cloneGitRepo"
 			}
 			
 		}
