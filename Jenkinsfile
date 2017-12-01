@@ -3,6 +3,9 @@ node('master') {
 	def buildFile2     = './MPS_Project_Rebase_local.gradle'
 	def buildWrapper  = './gradlew'
 	
+	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'PIDD',
+    usernameVariable: 'nexusUsername', passwordVariable: 'nexusPassword']])
+    {
 		stage ('checkout'){ 
 			checkout scm
 		}
@@ -33,6 +36,7 @@ node('master') {
 				echo "### There were test failures:\n${err}"
 			}
 		}
+    }
 	
 }
 
