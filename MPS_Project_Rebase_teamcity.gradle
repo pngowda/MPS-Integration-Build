@@ -11,15 +11,15 @@ configurations {
 }
 
 dependencies {
-    mps 'com.jetbrains:mps:2017.1-EAP-3'
+    mps "com.jetbrains:mps:$mpsVersion"
 }
 
 repositories {
     maven {
         url 'http://gowda:9091/nexus/content/repositories/MyRepo/'
 		credentials {
-			username 'pngowda'
-			password 'test123'
+			username project.nexusUsername
+			password project.nexusPassword
         }
     }
 }
