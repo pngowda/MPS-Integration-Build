@@ -27,8 +27,7 @@ repositories {
 
 task cloneGitRepo() {
 	def agentName=System.getProperty("env.AGENT_NAME")
-	
-	println "..."+agentN
+
 	println ",,,"+agentName
 
   File dirIets3Os = new File('iets3.opensource')
