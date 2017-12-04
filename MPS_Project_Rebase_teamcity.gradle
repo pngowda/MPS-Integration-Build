@@ -48,9 +48,9 @@ task cloneGitRepo() {
     //gitRepoClone(cloneDirectory,urlIets3Core)
     //git_checkout_update(cloneDirectory+File.separator+dirIets3core)
 
-    if(dirMbeddr.exists())dirMbeddr.deleteDir()
-    gitRepoClone(cloneDirectory,urlMbeddr)
-    git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
+    //if(dirMbeddr.exists())dirMbeddr.deleteDir()
+    //gitRepoClone(cloneDirectory,urlMbeddr)
+    //git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
 	
 	//git_push_changes(cloneDirectory+File.separator+dirMbeddr)
   }
