@@ -29,7 +29,7 @@ task resolve_mps(type: Copy) {
     from {
            configurations.mps.resolve().collect { zipTree(it) }
      }
-     into mps
+     into 'mps'
 }
 
 task cloneGitRepo(dependsOn:resolve_mps) {
