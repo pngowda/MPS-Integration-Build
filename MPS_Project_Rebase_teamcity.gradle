@@ -9,9 +9,9 @@ import org.ajoberstar.gradle.git.tasks.*
 configurations {
     mps
 }
-
+def mpsVersion=System.getenv("mpsVersion")
 dependencies {
-    mps "com.jetbrains:mps:System.getenv('mpsVersion')"
+    mps "com.jetbrains:mps:$mpsVersion"
 }
 
 repositories {
