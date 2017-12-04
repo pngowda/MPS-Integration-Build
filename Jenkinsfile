@@ -1,6 +1,6 @@
 node('master') {
 	def buildFile1     = './MPS_Version_Snapshot_local.gradle'
-	def buildFile2     = './MPS_Project_Rebase_local.gradle'
+	def buildFile2     = './MPS_Project_Rebase.gradle'
 	def buildWrapper  = './gradlew'
 	
 	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'PIDD',
