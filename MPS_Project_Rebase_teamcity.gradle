@@ -11,12 +11,12 @@ configurations {
 }
 
 dependencies {
-    //mps "com.jetbrains:mps:System.getenv('mpsVersion')"
+    mps "com.jetbrains:mps:System.getenv('mpsVersion')"
 }
 
 repositories {
     maven {
-        url 'http://gowda:9091/nexus/content/repositories/MyRepo/'
+        url 'https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/'
 		credentials {
 			username project.nexusUsername
 			password project.nexusPassword
@@ -24,12 +24,15 @@ repositories {
     }
 }
 
+task resolve_mps(type: Copy) {
+ dependsOn configurations.mps
+    from {
+           configurations.mps.resolve().collect { zipTree(it) }
+     }
+     into 'mps'
+}
 
-task cloneGitRepo() {
-	def agentName=System.getenv('AGENT_NAME')
-
-	println ",,,"+agentName
-
+task cloneGitRepo(dependsOn:resolve_mps) {
   File dirIets3Os = new File('iets3.opensource')
   File dirIets3core = new File('iets3.core')
   File dirMbeddr = new File('mbeddr.core')
