@@ -8,8 +8,8 @@ def mpsUnpackedDir
 def uploadVersion
 def mpsVersion
 def setMPSVersion
-//def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
-def mpsUploadURepo="http://gowda:9091/nexus/content/repositories/MyRepo/"
+def mpsUploadURepo="https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots/"
+//def mpsUploadURepo="http://gowda:9091/nexus/content/repositories/MyRepo/"
 
 
 task MPSVersionTask {
