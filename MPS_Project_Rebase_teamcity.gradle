@@ -26,7 +26,7 @@ repositories {
 
 
 task cloneGitRepo() {
-	def agentName=project.AGENT_NAME
+	def agentName=System.getenv("AGENT_NAME")
 
 	println ",,,"+agentName
 
