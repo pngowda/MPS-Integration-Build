@@ -24,12 +24,15 @@ repositories {
     }
 }
 
-task copy(type: Copy) {
-    from configurations.mps
-    into "mps"
+task resolve_mps(type: Copy) {
+ dependsOn configurations.mps
+    from {
+           configurations.mps.resolve().collect { zipTree(it) }
+     }
+     into mps
 }
 
-task cloneGitRepo(dependsOn:copy) {
+task cloneGitRepo(dependsOn:resolve_mps) {
   File dirIets3Os = new File('iets3.opensource')
   File dirIets3core = new File('iets3.core')
   File dirMbeddr = new File('mbeddr.core')
