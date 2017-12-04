@@ -24,6 +24,10 @@ repositories {
     }
 }
 
+task copy(type: Copy) {
+    from configurations.mps
+    into "mps"
+}
 
 task cloneGitRepo() {
   File dirIets3Os = new File('iets3.opensource')
