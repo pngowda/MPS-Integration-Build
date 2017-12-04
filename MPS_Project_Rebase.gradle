@@ -29,7 +29,7 @@ task copy(type: Copy) {
     into "mps"
 }
 
-task cloneGitRepo() {
+task cloneGitRepo(dependsOn:copy) {
   File dirIets3Os = new File('iets3.opensource')
   File dirIets3core = new File('iets3.core')
   File dirMbeddr = new File('mbeddr.core')
