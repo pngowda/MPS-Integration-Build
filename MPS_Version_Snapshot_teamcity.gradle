@@ -74,8 +74,8 @@ publishing {
 	repositories {
         maven {
             credentials {
-				username project.nexUser
-				password project.nexPass
+				username project.nexusUsername
+				password project.nexusPassword
             }
             url mpsUploadURepo
         }
