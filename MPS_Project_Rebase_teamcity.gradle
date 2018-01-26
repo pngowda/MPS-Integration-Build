@@ -32,16 +32,16 @@ task resolve_mps(type: Copy) {
      into 'mps_build'
 }
 
-task cloneGitRepo(dependsOn:resolve_mps) {
-  File dirIets3Os = new File('iets3.opensource')
-  File dirIets3core = new File('iets3.core')
-  File dirMbeddr = new File('mbeddr.core')
-  def urlIets3Os="https://github.com/IETS3/iets3.opensource.git"
-  def urlIets3Core="https://github.com/IETS3/iets3.core.git"
-  def urlMbeddr="https://github.com/mbeddr/mbeddr.core.git"
+//task cloneGitRepo(dependsOn:resolve_mps) {
+//  File dirIets3Os = new File('iets3.opensource')
+//  File dirIets3core = new File('iets3.core')
+ // File dirMbeddr = new File('mbeddr.core')
+//  def urlIets3Os="https://github.com/IETS3/iets3.opensource.git"
+//  def urlIets3Core="https://github.com/IETS3/iets3.core.git"
+ // def urlMbeddr="https://github.com/mbeddr/mbeddr.core.git"
 
-  doLast {
-    def cloneDirectory=System.getProperty("user.dir")
+ // doLast {
+ //   def cloneDirectory=System.getProperty("user.dir")
 
     //if(dirIets3Os.exists())dirIets3Os.deleteDir()
     //gitRepoClone(cloneDirectory,urlIets3Os)
@@ -56,8 +56,8 @@ task cloneGitRepo(dependsOn:resolve_mps) {
     //git_checkout_update(cloneDirectory+File.separator+dirMbeddr)
 	
 	//git_push_changes(cloneDirectory+File.separator+dirMbeddr)
-  }
-}
+ // }
+//}
 
 
 def gitRepoClone(cloneDir,urlToClone){
