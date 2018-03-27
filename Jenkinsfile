@@ -12,11 +12,11 @@ node('master') {
 		stage ('build'){
 			echo "Building on branch: ${env.BRANCH_NAME}"
 			if(isUnix()) {
-				//sh "chmod +x ${buildWrapper}"
-				//sh "${buildWrapper} -b ${buildFile1} publish"
+				sh "chmod +x ${buildWrapper}"
+				sh "${buildWrapper} -b ${buildFile1} publish"
 			}
 			else{
-				//bat "${buildWrapper} -b ${buildFile1} publish"
+				bat "${buildWrapper} -b ${buildFile1} publish"
 			}
 		}
 
