@@ -18,8 +18,8 @@ repositories {
     maven {
         url 'https://projects.itemis.de/nexus/content/repositories/mbeddr'
 		credentials {
-			username project.nexusUsername
-			password project.nexusPassword
+			username nexusUsername
+			password nexusPassword
         }
     }
 }
