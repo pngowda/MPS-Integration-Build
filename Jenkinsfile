@@ -3,7 +3,7 @@ node('master') {
 	def buildFile2     = './MPS_Project_Rebase.gradle'
 	def buildWrapper  = './gradlew'
 	
-	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'PIDD',
+	withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nex_id',
     usernameVariable: 'nexusUsername', passwordVariable: 'nexusPassword']])
     {
 		stage ('checkout'){ 
