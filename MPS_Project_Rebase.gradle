@@ -24,6 +24,32 @@ repositories {
     }
 }
 
+// URL to mbeddr Nexus
+//ext.dependencyRepositories = [
+ //       'https://projects.itemis.de/nexus/content/repositories/mbeddr',
+ //       'https://projects.itemis.de/nexus/content/repositories/mbeddr_snapshots'
+//]
+
+//repositories {
+    //check for published artifacts in maven local
+   // mavenLocal()
+    //for (repoUrl in project.dependencyRepositories) {
+        //maven {
+           // url repoUrl
+           // if (project.hasProperty('nexusUsername')) {
+            //    credentials {
+             //       username System.getenv('nexusUsername')
+             //       password System.getenv('nexusPassword')
+             //   }
+           // }
+        //}
+    //}
+    //if the dependencies could not be found in all other places, check in mavenCentral
+  //  mavenCentral()
+//}
+
+
+
 task resolve_mps(type: Copy) {
  dependsOn configurations.mps
     from {
